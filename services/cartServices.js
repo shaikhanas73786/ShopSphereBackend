@@ -36,48 +36,9 @@ export const addToCart = async (userId, productId, quantity = 1) => {
   return await cartModel.findById(cart._id).populate('items.product');
 };
 
-export const increaseCartQuantity = async (userId, productId) => {
-  const cart = await cartModel.findOne({ user: userId });
-  if (!cart) {
-    throw new Error('Cart not found');
-  }
 
-  const itemIndex = cart.items.findIndex(
-    (item) => item.product.toString() === productId.toString()
-  );
 
-  if (itemIndex === -1) {
-    throw new Error('Item not found in cart');
-  }
 
-  cart.items[itemIndex].quantity += 1;
-  await cart.save();
-  return await cartModel.findById(cart._id).populate('items.product');
-};
-
-export const decreaseCartQuantity = async (userId, productId) => {
-  const cart = await cartModel.findOne({ user: userId });
-  if (!cart) {
-    throw new Error('Cart not found');
-  }
-
-  const itemIndex = cart.items.findIndex(
-    (item) => item.product.toString() === productId.toString()
-  );
-
-  if (itemIndex === -1) {
-    throw new Error('Item not found in cart');
-  }
-
-  if (cart.items[itemIndex].quantity > 1) {
-    cart.items[itemIndex].quantity -= 1;
-  } else {
-    cart.items.splice(itemIndex, 1);
-  }
-
-  await cart.save();
-  return await cartModel.findById(cart._id).populate('items.product');
-};
 
 export const removeFromCart = async (userId, productId) => {
   const cart = await cartModel.findOne({ user: userId });

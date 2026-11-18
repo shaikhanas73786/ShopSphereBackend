@@ -13,6 +13,6 @@ adminRoute.use(authMiddleware, adminMiddleware);
 adminRoute.get('/users', getAllUsers);
 adminRoute.get('/orders', getAllOrders);
 adminRoute.put('/order/status/:id', updateOrderStatus);
-adminRoute.put('/order/status', updateOrderStatus);
+
 
 export default adminRoute;

@@ -10,7 +10,7 @@ export const createProduct = async (req, res) => {
   try {
     const { title, description, price, category, image, stock, rating, brand } = req.body;
 
-    if (!title || price === undefined || !category || stock === undefined) {
+    if (!title && price === undefined && !category && stock === undefined) {
       return res.status(400).json({
         message: 'Title, price, category, and stock are required'
       });
@@ -41,10 +41,7 @@ export const createProduct = async (req, res) => {
 
 export const getAllProducts = async (req, res) => {
   try {
-    
-
     const products = await getAllProductsService();
-
     return res.status(200).json({
       message: 'Products fetched successfully',
       response: products

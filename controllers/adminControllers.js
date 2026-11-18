@@ -34,7 +34,7 @@ export const getAllOrders = async (req, res) => {
 
 export const updateOrderStatus = async (req, res) => {
   try {
-    const orderId = req.params.id || req.body.orderId;
+    const orderId = req.params.id ;
     const { status } = req.body;
 
     const allowedStatuses = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];

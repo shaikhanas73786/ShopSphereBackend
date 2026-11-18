@@ -10,3 +10,4 @@ const connectDB = async (dbURL, dbName) => {
 };
 
 export default connectDB;
+

@@ -1,8 +1,6 @@
 import {
   getCartByUserId,
   addToCart as addToCartService,
-  increaseCartQuantity,
-  decreaseCartQuantity,
   removeFromCart as removeFromCartService,
   clearCart as clearCartService
 } from '../services/cartServices.js';
@@ -42,47 +40,9 @@ export const addToCart = async (req, res) => {
   }
 };
 
-export const increaseQuantity = async (req, res) => {
-  try {
-    const productId = req.body.productId || req.params.productId;
-    if (!productId) {
-      return res.status(400).json({
-        message: 'Product ID is required'
-      });
-    }
 
-    const updatedCart = await increaseCartQuantity(req.user.id, productId);
-    return res.status(200).json({
-      message: 'Item quantity increased',
-      response: updatedCart
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: error.message || 'Internal Server Error'
-    });
-  }
-};
 
-export const decreaseQuantity = async (req, res) => {
-  try {
-    const productId = req.body.productId || req.params.productId;
-    if (!productId) {
-      return res.status(400).json({
-        message: 'Product ID is required'
-      });
-    }
 
-    const updatedCart = await decreaseCartQuantity(req.user.id, productId);
-    return res.status(200).json({
-      message: 'Item quantity updated',
-      response: updatedCart
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: error.message || 'Internal Server Error'
-    });
-  }
-};
 
 export const removeFromCart = async (req, res) => {
   try {

@@ -28,3 +28,5 @@ export const deleteUser = async (id) => {
 export const findAllUsers = async () => {
   return await userModel.find().select('-password');
 };
+
+

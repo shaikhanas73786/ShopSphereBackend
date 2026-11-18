@@ -15,7 +15,7 @@ export const createAccount = async (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
 
-    if (!name || !email || !password) {
+    if (!name && !email && !password) {
       return res.status(400).json({
         message: 'Name, email, and password are required'
       });
@@ -30,7 +30,7 @@ export const createAccount = async (req, res) => {
 
     const hashedPassword = await hashPass(password);
 
-    
+
     const newUser = await createUser({
       name: name.trim(),
       email: email.toLowerCase().trim(),
@@ -65,13 +65,13 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password) {
+    if (!email && !password) {
       return res.status(400).json({
         message: 'Email and password are required'
       });
     }
 
-    
+
     const user = await findUser({ email: email.toLowerCase().trim() });
 
     if (!user) {
@@ -146,7 +146,7 @@ export const userProfile = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { name, phone, password } = req.body;
-    
+
     const updatePayload = {};
 
     if (name) updatePayload.name = name.trim();
